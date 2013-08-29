@@ -1,14 +1,13 @@
 package com.me.mygdxgame;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 
-public class Player extends MovingEntity implements Drawable {
+public class Player extends MovingEntity {
 	public static final Float MOVE_FORCE = 200.0f;
 	public static final Float JUMP_FORCE = 450.0f;
-
-	PlayerAssets assets;
 
 	Vector2 size;
 	Boolean isJumping = false;
@@ -51,12 +50,86 @@ public class Player extends MovingEntity implements Drawable {
 		super.update(dt);
 		gun.update(dt);
 	}
-	
-	public void draw() {
+
+	@Override
+	public void draw(SpriteBatch batch, float x, float y, float width,
+			float height) {
 		ShapeRenderer r = new ShapeRenderer();
 		r.begin(ShapeType.Circle);
 		r.setColor(1, 1, 0, 1);
 		r.circle(position.x, position.y, size.x / 2);
 		r.end();
+	}
+
+	@Override
+	public float getLeftWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setLeftWidth(float leftWidth) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getRightWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setRightWidth(float rightWidth) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getTopHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setTopHeight(float topHeight) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getBottomHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setBottomHeight(float bottomHeight) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getMinWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setMinWidth(float minWidth) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getMinHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setMinHeight(float minHeight) {
+		// TODO Auto-generated method stub
+		
 	}
 }

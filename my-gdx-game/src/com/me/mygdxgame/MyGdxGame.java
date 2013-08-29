@@ -2,10 +2,12 @@ package com.me.mygdxgame;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
@@ -15,14 +17,14 @@ public class MyGdxGame implements ApplicationListener {
    Camera camera;
    Player player;
    PhysicsEngine physicsEngine;
-   Collection<Drawable> drawableObjects = new ArrayList<Drawable>();
+   Collection<GameObject> gameObjects = new ArrayList<GameObject>();
    
    @Override
    public void create() {
       player = new Player(new Vector2(40, 40));
       physicsEngine = new PhysicsEngine();
       physicsEngine.add(player);
-      drawableObjects.add(player);
+      gameObjects.add(player);
 	   
 	   // create the camera and the SpriteBatch
       camera = new Camera(player, 800, 480, 0, 1000);
@@ -65,7 +67,7 @@ public class MyGdxGame implements ApplicationListener {
           if (player.canFire()) {
 	          Bullet bullet = player.fire(new Vector2(touchPos.x, touchPos.y));
 	          physicsEngine.add(bullet);
-	          drawableObjects.add(bullet);
+	          gameObjects.add(bullet);
           }
        }
 
@@ -75,9 +77,12 @@ public class MyGdxGame implements ApplicationListener {
       // tell the camera to update its matrices.
       camera.update();
       
-      for (Drawable d : drawableObjects) {
-    	  d.draw();
+      SpriteBatch sb = new SpriteBatch();
+      sb.begin();
+      for (GameObject o : gameObjects) {
+    	  o.draw(sb, 0, 0, camera.width, camera.height);
       }
+      sb.end();
    }
    
    @Override

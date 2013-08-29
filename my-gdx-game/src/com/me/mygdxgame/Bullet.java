@@ -1,10 +1,11 @@
 package com.me.mygdxgame;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 
-public class Bullet extends MovingEntity implements Drawable {
+public class Bullet extends MovingEntity {
 	Vector2 size;
 	public Bullet(
 			Vector2 size,
@@ -15,7 +16,9 @@ public class Bullet extends MovingEntity implements Drawable {
 		this.momentum = momentum;
 	}
 	public void onLand() {}
-	public void draw() {
+	@Override
+	public void draw(SpriteBatch batch, float x, float y, float width,
+			float height) {
 		ShapeRenderer r = new ShapeRenderer();
 		r.begin(ShapeType.Triangle);
 		r.setColor(1, 0, 1, 1);
@@ -24,5 +27,65 @@ public class Bullet extends MovingEntity implements Drawable {
 				position.x + size.x / 2, position.y - size.y / 2,
 				position.x - size.x / 2, position.y - size.y / 2);
 		r.end();
+	}
+	@Override
+	public float getLeftWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void setLeftWidth(float leftWidth) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public float getRightWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void setRightWidth(float rightWidth) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public float getTopHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void setTopHeight(float topHeight) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public float getBottomHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void setBottomHeight(float bottomHeight) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public float getMinWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void setMinWidth(float minWidth) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public float getMinHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void setMinHeight(float minHeight) {
+		// TODO Auto-generated method stub
+		
 	}
 }

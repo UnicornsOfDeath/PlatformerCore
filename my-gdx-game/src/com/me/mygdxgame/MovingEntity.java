@@ -2,7 +2,7 @@ package com.me.mygdxgame;
 
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class MovingEntity {
+public abstract class MovingEntity implements GameObject {
 	Vector2 position = new Vector2(Vector2.Zero);
 	Vector2 momentum = new Vector2(Vector2.Zero);
 	
