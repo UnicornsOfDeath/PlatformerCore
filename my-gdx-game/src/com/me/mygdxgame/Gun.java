@@ -22,6 +22,7 @@ public class Gun {
 		return new Bullet(
 				new Vector2(5, 5),
 				new Vector2(from),
-				new Vector2(to).add(new Vector2(from).mul(-1)).nor().mul(SPEED));
+				new Vector2(to).add(new Vector2(from).mul(-1)).nor().mul(SPEED),
+				Bullet.LIFETIME);
 	}
 }

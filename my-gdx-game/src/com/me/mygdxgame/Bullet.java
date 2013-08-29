@@ -6,16 +6,30 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bullet extends MovingEntity {
+	public static final float LIFETIME = 3.0f;
 	Vector2 size;
+	float lifetime;
+	float lifetimeCounter = 0;
 	public Bullet(
 			Vector2 size,
 			Vector2 position,
-			Vector2 momentum) {
+			Vector2 momentum,
+			float lifetime) {
 		this.size = size;
 		this.position = position;
 		this.momentum = momentum;
+		this.lifetime = lifetime;
 	}
 	public void onLand() {}
+	@Override
+	public boolean isExpired() {
+		return lifetimeCounter > lifetime;
+	}
+	@Override
+	public void update(float dt) {
+		super.update(dt);
+		this.lifetimeCounter += dt;
+	}
 	@Override
 	public void draw(SpriteBatch batch, float x, float y, float width,
 			float height) {

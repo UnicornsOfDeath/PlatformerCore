@@ -132,4 +132,9 @@ public class Player extends MovingEntity {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean isExpired() {
+		return false;
+	}
 }
