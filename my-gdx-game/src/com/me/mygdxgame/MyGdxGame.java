@@ -8,20 +8,21 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 
 public class MyGdxGame implements ApplicationListener {
 	Camera camera;
 	Player player;
 	PhysicsEngine physicsEngine;
 	Collection<GameObject> gameObjects = new ArrayList<GameObject>();
+	ControlScheme scheme;
+	PlayerController controller;
 
 	@Override
 	public void create() {
 		player = new Player(new Vector2(40, 40));
+		scheme = new ControlScheme(Keys.A, Keys.D, Keys.SPACE);
+		controller = new PlayerController(player, scheme);
 		physicsEngine = new PhysicsEngine();
 		physicsEngine.add(player);
 		gameObjects.add(player);
@@ -38,35 +39,10 @@ public class MyGdxGame implements ApplicationListener {
 	}
 	
 	void handleInput() {
-		if (Gdx.input.isKeyPressed(Keys.A)) {
-			player.moveLeft();
-		}
-		else if (Gdx.input.isKeyPressed(Keys.D)) {
-			player.moveRight();
-		}
-		else {
-			player.stopMoving();
-		}
-		if (Gdx.input.isKeyPressed(Keys.SPACE)) {
-			player.jump();
-		}
-		if (Gdx.input.isTouched()) {
-			Vector3 touchPos = new Vector3();
-			touchPos.set(
-					Gdx.input.getX(),
-					camera.height - Gdx.input.getY(),
-					0);
-			ShapeRenderer r = new ShapeRenderer();
-			r.begin(ShapeType.Line);
-			r.setColor(1, 1, 0, 1);
-			r.line(player.position.x, player.position.y,
-					touchPos.x, touchPos.y);
-			r.end();
-			if (player.canFire()) {
-				Bullet bullet = player.fire(new Vector2(touchPos.x, touchPos.y));
-				physicsEngine.add(bullet);
-				gameObjects.add(bullet);
-			}
+		Bullet bullet = controller.handleInput(camera);
+		if (bullet != null) {
+			physicsEngine.add(bullet);
+			gameObjects.add(bullet);
 		}
 	}
 
@@ -94,6 +70,7 @@ public class MyGdxGame implements ApplicationListener {
 		for (GameObject o : gameObjects) {
 			o.draw(null, 0, 0, camera.width, camera.height);
 		}
+		controller.draw();
 	}
 
 	@Override

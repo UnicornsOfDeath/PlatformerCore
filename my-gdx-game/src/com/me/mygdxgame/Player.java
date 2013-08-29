@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 
-public class Player extends MovingEntity {
+public class Player extends MovingEntity implements PlayerControl {
 	public static final Float MOVE_FORCE = 200.0f;
 	public static final Float JUMP_FORCE = 450.0f;
 
@@ -136,5 +136,10 @@ public class Player extends MovingEntity {
 	@Override
 	public boolean isExpired() {
 		return false;
+	}
+
+	@Override
+	public Vector2 getPosition() {
+		return new Vector2(position);
 	}
 }
