@@ -15,7 +15,10 @@ public class PhysicsEngine {
 	public void update(float dt) {
 		for (MovingEntity entity : entities) {
 			entity.addGravity(GRAVITY*dt);
-			entity.update(dt);
+		}
+	}
+	public void postUpdate() {
+		for (MovingEntity entity : entities) {
 			entity.land(FLOOR_Y);
 		}
 	}

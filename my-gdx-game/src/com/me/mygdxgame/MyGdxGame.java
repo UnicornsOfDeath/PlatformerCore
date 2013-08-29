@@ -69,20 +69,21 @@ public class MyGdxGame implements ApplicationListener {
 	          physicsEngine.add(bullet);
 	          gameObjects.add(bullet);
           }
-       }
+      }
 
       Float dt = Gdx.graphics.getDeltaTime();
       physicsEngine.update(dt);
+      for (GameObject o : gameObjects) {
+    	  o.update(dt);
+      }
+      physicsEngine.postUpdate();
 
       // tell the camera to update its matrices.
       camera.update();
-      
-      SpriteBatch sb = new SpriteBatch();
-      sb.begin();
+
       for (GameObject o : gameObjects) {
-    	  o.draw(sb, 0, 0, camera.width, camera.height);
+    	  o.draw(null, 0, 0, camera.width, camera.height);
       }
-      sb.end();
    }
    
    @Override
