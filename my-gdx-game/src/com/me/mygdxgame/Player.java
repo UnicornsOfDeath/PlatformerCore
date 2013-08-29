@@ -12,7 +12,7 @@ public class Player extends MovingEntity implements Drawable {
 
 	Vector2 size;
 	Boolean isJumping = false;
-	Gun gun = new Gun();
+	Gun gun = new Gun(Gun.DELAY);
 	
 	public Player(Vector2 size) {
 		this.size = size;
@@ -40,8 +40,16 @@ public class Player extends MovingEntity implements Drawable {
 		}
 	}
 	
+	public boolean canFire() {
+		return gun.canFire();
+	}
 	public Bullet fire(Vector2 to) {
 		return gun.fire(position, to);
+	}
+	
+	public void update(float dt) {
+		super.update(dt);
+		gun.update(dt);
 	}
 	
 	public void draw() {

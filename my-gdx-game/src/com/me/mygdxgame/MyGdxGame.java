@@ -62,9 +62,11 @@ public class MyGdxGame implements ApplicationListener {
           r.line(player.position.x, player.position.y,
         		  touchPos.x, touchPos.y);
           r.end();
-          Bullet bullet = player.fire(new Vector2(touchPos.x, touchPos.y));
-          physicsEngine.add(bullet);
-          drawableObjects.add(bullet);
+          if (player.canFire()) {
+	          Bullet bullet = player.fire(new Vector2(touchPos.x, touchPos.y));
+	          physicsEngine.add(bullet);
+	          drawableObjects.add(bullet);
+          }
        }
 
       Float dt = Gdx.graphics.getDeltaTime();
