@@ -55,9 +55,9 @@ public class Player extends MovingEntity implements PlayerControl {
 	public void draw(SpriteBatch batch, float x, float y, float width,
 			float height) {
 		ShapeRenderer r = new ShapeRenderer();
-		r.begin(ShapeType.Circle);
+		r.begin(ShapeType.Rectangle);
 		r.setColor(1, 1, 0, 1);
-		r.circle(position.x, position.y, size.x / 2);
+		r.rect(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
 		r.end();
 	}
 
@@ -141,5 +141,10 @@ public class Player extends MovingEntity implements PlayerControl {
 	@Override
 	public Vector2 getPosition() {
 		return new Vector2(position);
+	}
+
+	@Override
+	float getFeetYOffset() {
+		return -size.y / 2;
 	}
 }

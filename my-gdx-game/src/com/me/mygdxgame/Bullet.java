@@ -102,4 +102,8 @@ public class Bullet extends MovingEntity {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	float getFeetYOffset() {
+		return -size.y / 2;
+	}
 }

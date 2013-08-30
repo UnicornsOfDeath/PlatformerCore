@@ -13,11 +13,12 @@ public abstract class MovingEntity implements GameObject {
 		momentum.y += force;
 	}
 	public void land(float floorY) {
-		if (position.y < floorY) {
-			position.y = floorY;
+		if (position.y + getFeetYOffset() < floorY) {
+			position.y = floorY - getFeetYOffset();
 			momentum.y = 0;
 			onLand();
 		}
 	}
 	abstract void onLand();
+	abstract float getFeetYOffset();
 }
