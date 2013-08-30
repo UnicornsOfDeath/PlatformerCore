@@ -106,4 +106,7 @@ public class Bullet extends MovingEntity {
 	float getFeetYOffset() {
 		return -size.y / 2;
 	}
+	@Override
+	void onJump() {
+	}
 }

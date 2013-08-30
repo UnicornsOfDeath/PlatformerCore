@@ -10,7 +10,6 @@ public class Player extends MovingEntity implements PlayerControl {
 	public static final Float JUMP_FORCE = 450.0f;
 
 	Vector2 size;
-	Boolean isJumping = false;
 	Gun gun = new Gun(Gun.DELAY);
 	
 	public Player(Vector2 size) {
@@ -27,16 +26,10 @@ public class Player extends MovingEntity implements PlayerControl {
 		momentum.x = 0;
 	}
 
-	public void jump() {
-		if (!isJumping) {
-			momentum.y = Player.JUMP_FORCE;
-			isJumping = true;
-		}
+	void onJump() {
+		momentum.y = Player.JUMP_FORCE;
 	}
-	public void onLand() {
-		if (isJumping) {
-			isJumping = false;
-		}
+	void onLand() {
 	}
 	
 	public boolean canFire() {
@@ -57,7 +50,9 @@ public class Player extends MovingEntity implements PlayerControl {
 		ShapeRenderer r = new ShapeRenderer();
 		r.begin(ShapeType.Rectangle);
 		r.setColor(1, 1, 0, 1);
-		r.rect(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
+		r.translate(position.x, position.y, 0);
+		r.scale(size.x, size.y, 1.0f);
+		r.rect(-0.5f, -0.5f, 1.0f, 1.0f);
 		r.end();
 	}
 

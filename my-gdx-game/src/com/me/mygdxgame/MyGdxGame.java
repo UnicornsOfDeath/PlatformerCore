@@ -20,7 +20,7 @@ public class MyGdxGame implements ApplicationListener {
 
 	@Override
 	public void create() {
-		player = new Player(new Vector2(40, 70));
+		player = new AnimatedPlayer(new Vector2(40, 70));
 		scheme = new ControlScheme(Keys.A, Keys.D, Keys.SPACE);
 		controller = new PlayerController(player, scheme);
 		physicsEngine = new PhysicsEngine();
